@@ -6,7 +6,7 @@
 /*   By: msavina <msavina@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 12:34:44 by msavina           #+#    #+#             */
-/*   Updated: 2023/12/18 18:34:17 by msavina          ###   ########.fr       */
+/*   Updated: 2023/12/18 18:52:59 by msavina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	sig_handler_snd(int sig_num)
 	}
 }
 
-void	ft_kill(int pid, char*str)
+void	ft_kill(int pid, char *str)
 {
 	int				i;
 	unsigned char	bit;
