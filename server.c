@@ -6,7 +6,7 @@
 /*   By: msavina <msavina@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 12:34:59 by msavina           #+#    #+#             */
-/*   Updated: 2023/12/18 17:57:09 by msavina          ###   ########.fr       */
+/*   Updated: 2023/12/18 18:54:43 by msavina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ int	main(void)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = &sig_handler_rcv;
-	if (sigaction(SIGUSR1, &sa, NULL) == -1);
+	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 		return (write(2, "Error handling SIGUSR1\n", 24), EXIT_FAILURE);
-	else (sigaction(SIGUSR2, &sa, NULL) == -1);
-		return(write(2, "Error handling SIGUSR2\n", 24), EXIT_FAILURE);
-	write(1, "\nServer_PID: ", 6):
+	else if (sigaction(SIGUSR2, &sa, NULL) == -1)
+		return (write(2, "Error handling SIGUSR2\n", 24), EXIT_FAILURE);
+	write(1, "\nServer_PID: ", 6);
 	ft_putnbr_fd(getpid(), 1);
 	write(1, "\n", 1);
 	while(1)
