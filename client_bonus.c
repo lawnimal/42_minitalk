@@ -6,7 +6,7 @@
 /*   By: msavina <msavina@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:27:04 by msavina           #+#    #+#             */
-/*   Updated: 2023/12/19 14:27:07 by msavina          ###   ########.fr       */
+/*   Updated: 2023/12/19 17:45:58 by msavina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,24 @@ void	ft_kill(int pid, char *str)
 				kill(pid, SIGUSR2);
 			else
 				kill(pid, SIGUSR1);
-			usleep(100);
+			usleep(150);
 		}
 	}
 	i = 8;
 	while (i--)
 	{
 		kill(pid, SIGUSR1);
-		usleep(100);
+		usleep(150);
 	}
+}
+void leaks()
+{
+	system("leaks client_bonus");
 }
 
 int	main(int argc, char **argv)
 {
+	atexit(leaks);
 	if (argc != 3 || !ft_strlen(argv[2]))
 	{
 		write(1, R, ft_strlen(R));
@@ -72,9 +77,9 @@ int	main(int argc, char **argv)
 	signal(SIGUSR1, sig_handler_snd);
 	signal(SIGUSR2, sig_handler_snd);
 	ft_kill(ft_atoi(argv[1]), argv[2]);
-	while (1)
-	{
-		pause();
-	}
+	// while (1)
+	// {
+		// pause();
+	// }
 	return (EXIT_SUCCESS);
 }

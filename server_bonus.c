@@ -6,11 +6,20 @@
 /*   By: msavina <msavina@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:26:48 by msavina           #+#    #+#             */
-/*   Updated: 2023/12/19 14:26:51 by msavina          ###   ########.fr       */
+/*   Updated: 2023/12/20 12:12:24 by msavina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+void ft_lstprint(t_list *lst)
+{
+	while (lst)
+	{
+		ft_putchar_fd(*(char *)lst->content, 1);
+		lst = lst->next;
+	}
+}
 
 /// @brief handler function of received signal. Called when server receives
 // SIGUSER1 or SIGUSER2 signal from client;
@@ -24,6 +33,8 @@ void	sig_handler_rcv(int sig_num, siginfo_t *info, void *context)
 	static int				i;
 	static pid_t			client_pid;
 	static unsigned char	c;
+	static t_list	*list;
+	char *pc;
 
 	(void)context;
 	if (!client_pid)
@@ -36,29 +47,30 @@ void	sig_handler_rcv(int sig_num, siginfo_t *info, void *context)
 		if (!c)
 		{
 			kill(client_pid, SIGUSR2);
+			ft_lstprint(list);
 			write(1, "\n", 1);
 			client_pid = 0;
+			ft_lstclear(&list, &free);
 			return ;
 		}
-		ft_putchar_fd(c, 1);
+		pc = malloc(1 * sizeof(char));
+		*pc = c;
+		ft_lstadd_back(&list, ft_lstnew(pc));
+		//ft_putchar_fd(c, 1);
 		c = 0;
 		kill(client_pid, SIGUSR1);
 	}
 }
-/// @brief data structure for signal handling, members: sa_handler holds
-// the address of signal handler function; sa_mask blocks signals
-// during execution of signal handler; sigemptyset function intializes
-// the signal set pointet by &sa.sa_mask, which emtying it; member sa_flags
-// receives add information about signal, SA_SIGINFO handler func receives
-// siginfo_t (PID),func sigaction error handling of SIGUSER1 & SIGUSER2;
-/// @param  void
-/// @return void. Programm end with infinite loop and pause() 
-// This ensures that program keeps waiting for signals indefinitely;
+void leaks()
+{
+	system("leaks server_bonus");
+}
 
 int	main(void)
 {
 	struct sigaction	sa;
-
+	
+	atexit(leaks);
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = &sig_handler_rcv;
@@ -71,7 +83,7 @@ int	main(void)
 	write(1, X, ft_strlen(X));
 	ft_putnbr_fd(getpid(), 1);
 	write(1, "\n", 1);
-	while (1)
+	// while (1)
 		pause();
 	return (EXIT_SUCCESS);
-}
+} 

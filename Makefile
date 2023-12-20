@@ -22,7 +22,7 @@ all : makelibft $(CLIENTNAME) $(SERVERNAME)
 
 makelibft :
 	@if [ ! -f "$(LIBFT)" ]; then \
-		make -C $(LIBFTDIR); \
+		make bonus -C $(LIBFTDIR); \
 	fi
 
 bonus: $(CLIENTNAME)_bonus $(SERVERNAME)_bonus
