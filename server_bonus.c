@@ -6,7 +6,7 @@
 /*   By: msavina <msavina@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:26:48 by msavina           #+#    #+#             */
-/*   Updated: 2023/12/20 12:12:24 by msavina          ###   ########.fr       */
+/*   Updated: 2023/12/20 13:14:49 by msavina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	main(void)
 	write(1, X, ft_strlen(X));
 	ft_putnbr_fd(getpid(), 1);
 	write(1, "\n", 1);
-	// while (1)
+	while (1)
 		pause();
 	return (EXIT_SUCCESS);
 } 

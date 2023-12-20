@@ -6,7 +6,7 @@
 /*   By: msavina <msavina@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 12:34:59 by msavina           #+#    #+#             */
-/*   Updated: 2023/12/19 14:23:29 by msavina          ###   ########.fr       */
+/*   Updated: 2023/12/20 13:15:47 by msavina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	sig_handler_rcv(int sig_num, siginfo_t *info, void *context)
 		kill(client_pid, SIGUSR1);
 	}
 }
-/// @brief data structure for signal handling, members: sa_handler holds
-// the address of signal handler function; sa_mask blocks signals
-// during execution of signal handler; sigemptyset function intializes
+/// @brief data struct for sig handling, members: sa_handler holds
+// address of signal handler func; sa_mask blocks signals
+// during execution of sig handler; sigemptyset func intializes
 // the signal set pointet by &sa.sa_mask, which emtying it; member sa_flags
 // receives add information about signal, SA_SIGINFO handler func receives
 // siginfo_t (PID),func sigaction error handling of SIGUSER1 & SIGUSER2;
