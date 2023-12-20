@@ -2,6 +2,8 @@ CLIENTNAME = client
 SERVERNAME = server
 LIBFT = ./libft/libft.a
 LIBFTDIR = libft
+CLIENTNAME_B = client_bonus
+SERVERNAME_B = server_bonus
 
 CC = cc
 CFLAGS = -Wextra -Werror -Wall
@@ -46,7 +48,7 @@ clean :
 	$(RM) $(CLIENTOBJS) $(SERVEROBJS) $(CLIENTOBJS_B) $(SERVEROBJS_B)
 
 fclean : clean
-	$(RM) $(CLIENTNAME) $(SERVERNAME)
+	$(RM) $(CLIENTNAME) $(SERVERNAME) $(CLIENTNAME_B) $(SERVERNAME_B)
 
 re : fclean all
 
