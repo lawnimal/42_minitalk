@@ -6,14 +6,14 @@
 /*   By: msavina <msavina@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:02:46 by msavina           #+#    #+#             */
-/*   Updated: 2023/12/18 17:57:32 by msavina          ###   ########.fr       */
+/*   Updated: 2023/12/20 21:03:41 by msavina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
 
-# include "/Users/msavina/libft/retry_libft/libft.h"
+# include "libft/libft.h"
 # include <signal.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -32,5 +32,6 @@ size_t	ft_strlen(const char *s);
 void	ft_kill(int pid, char*str);
 void	sig_handler_rcv(int sig_num, siginfo_t *info, void *context);
 void	sig_handler_snd(int sig_num);
+void	ft_lstprint(t_list *lst);
 
 #endif

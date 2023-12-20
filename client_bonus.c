@@ -6,7 +6,7 @@
 /*   By: msavina <msavina@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 14:27:04 by msavina           #+#    #+#             */
-/*   Updated: 2023/12/20 13:14:41 by msavina          ###   ########.fr       */
+/*   Updated: 2023/12/20 21:04:34 by msavina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sig_handler_snd(int sig_num)
 {
-	static int	received;
+	static	int	received;
 
 	if (sig_num == SIGUSR1)
 		++received;
@@ -41,19 +41,21 @@ void	ft_kill(int pid, char *str)
 				kill(pid, SIGUSR2);
 			else
 				kill(pid, SIGUSR1);
-			usleep(150);
+			usleep(160);
 		}
 	}
 	i = 8;
 	while (i--)
 	{
 		kill(pid, SIGUSR1);
-		usleep(150);
+		usleep(160);
 	}
 }
 
 int	main(int argc, char **argv)
 {
+	char	*str;
+	
 	if (argc != 3 || !ft_strlen(argv[2]))
 	{
 		write(1, R, ft_strlen(R));
@@ -61,7 +63,8 @@ int	main(int argc, char **argv)
 		write(1, X, ft_strlen(X));
 		return (EXIT_FAILURE);
 	}
-	ft_putstr_fd(G, 1);
+	str = argv[2]
+;	ft_putstr_fd(G, 1);
 	ft_putstr_fd("Sent: ", 1);
 	ft_putstr_fd(X, 1);
 	ft_putnbr_fd(ft_strlen(argv[2]), 1);
@@ -71,16 +74,10 @@ int	main(int argc, char **argv)
 	ft_putstr_fd(X, 1);
 	signal(SIGUSR1, sig_handler_snd);
 	signal(SIGUSR2, sig_handler_snd);
-	ft_kill(ft_atoi(argv[1]), argv[2]);
+	ft_kill(ft_atoi(argv[1]), str);
 	while (1)
 	{
 		pause();
 	}
 	return (EXIT_SUCCESS);
 }
-// void leaks()
-// {
-// 	system("leaks client_bonus");
-// }
-
-// atexit(leaks);
